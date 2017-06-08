@@ -4,11 +4,12 @@ var userController = require('../controllers/users.js')
 var passport = require('passport')
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+// router.get('/', function(req, res, next) {
+//   res.send('respond with a resource');
+// });
 
 router.post('/signup', userController.signup)
 router.post('/signin', passport.authenticate('local', { session: false }), userController.signin)
+router.get('/', userController.read);
 
 module.exports = router;

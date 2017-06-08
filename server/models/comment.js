@@ -3,7 +3,7 @@ var Schema = mongoose.Schema
 
 
 var commentSchema = new Schema({
-  comment: String
+  comment: String,
   user_id: {type: Schema.Types.ObjectId, ref: 'User'}
 }, {timestamps: true})
 
