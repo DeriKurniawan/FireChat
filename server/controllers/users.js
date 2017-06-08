@@ -12,6 +12,7 @@ module.exports = {
     })
     createUser.save((err, user)=>{
       if(!err){
+        console.log(bcrypt.compareSync('123456', user.password));
         res.send(user)
       } else {
         res.send(err)
@@ -20,6 +21,7 @@ module.exports = {
   },
   signin : (req, res)=>{
     var user = req.user
+    console.log(user)
     if(user.hasOwnProperty('massage')){
       res.send(user.massage)
     }else {
@@ -30,8 +32,20 @@ module.exports = {
         email: user.email,
       }, 'rahasia', {expiresIn: '1d'})
       res.send({
+
         token: token
+
       })
+      console.log(token)
     }
+  },
+  read : (req, res)=>{
+    User.find((err, result)=>{
+      if(!err){
+        res.send(result)
+      } else {
+        res.send(err)
+      }
+    })
   }
 }
