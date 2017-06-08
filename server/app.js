@@ -5,6 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport')
+var LocalStrategy = require('passport-local')
+var bcrypt = require('bcrypt')
+var User = require('./models/user.js')
 
 var db_config = {
 	development: 'mongodb://localhost:27017/firechat1db',
@@ -13,6 +17,19 @@ var db_config = {
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+
+passport.use(new LocalStrategy(
+	function(username, password, done){
+	  User.findOne({username : username}, (err, user)=>{
+	    if(!user){
+	      return done(null, { message:'Username or Password is Wrong' })
+	    }
+	    if(!bcrypt.compareSync(password, user.password)){
+	      return done(null, { message: 'Username or Password is Wrong' })
+	    }
+    return done(null, user)
+  })
+	}));
 
 var app = express();
 var app_env = app.settings.env;
