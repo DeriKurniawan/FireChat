@@ -1,19 +1,25 @@
 {
-  "name": "fire-chat",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "firechat",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www",
+    "test": "NODE_ENV=test mocha"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DeriKurniawan/FireChat.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/DeriKurniawan/FireChat/issues"
-  },
-  "homepage": "https://github.com/DeriKurniawan/FireChat#readme"
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "chai": "^4.0.2",
+    "chai-http": "^3.0.0",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.3",
+    "debug": "~2.6.3",
+    "dotenv": "^4.0.0",
+    "express": "~4.15.2",
+    "jade": "~1.11.0",
+    "mocha": "^3.4.2",
+    "mongoose": "^4.10.5",
+    "morgan": "~1.8.1",
+    "nodemon": "^1.11.0",
+    "serve-favicon": "~2.4.2"
+  }
 }
