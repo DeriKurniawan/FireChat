@@ -4,12 +4,14 @@ var bcrypt = require('bcrypt')
 
 module.exports = {
   create : (req, res)=>{
+    console.log('ini req.body: ', req.body)
     var createComment = new Comment({
       comment: req.body.comment,
       user_id: req.decoded.id
     })
     createComment.save((err, comment)=>{
       if(!err){
+        console.log('ini comment: ', comment)
         res.send(comment)
       } else {
         res.send(err)

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var userController = require('../controllers/comments.js')
+var userController = require('../controllers/comments')
 var helper = require('../helpers/jwtVerify.js')
 
 /* GET users listing. */
