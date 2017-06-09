@@ -1,21 +1,24 @@
 var User = require('../models/user.js')
 var jwt = require('jsonwebtoken')
 var bcrypt = require('bcrypt')
+var helper = require('../helpers/croneJob.js')
+var mongoose = require('mongoose')
+mongoose.Promise = require('bluebird')
+
 
 module.exports = {
   signup : (req, res)=>{
-    var createUser = new User({
+    User.create({
       name: req.body.name,
       username: req.body.username,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
-    })
-    createUser.save((err, user)=>{
-      if(!err){
-        console.log(bcrypt.compareSync('123456', user.password));
-        res.send(user)
+    }, (err, user)=>{
+      if(err){
+        res.send({message: 'user already used, please log in'})
       } else {
-        res.send(err)
+        helper.createCronJob(user)
+        res.send(user)
       }
     })
   },
@@ -32,9 +35,8 @@ module.exports = {
         email: user.email,
       }, 'rahasia', {expiresIn: '1d'})
       res.send({
-
+        name: user.name,
         token: token
-
       })
       console.log(token)
     }

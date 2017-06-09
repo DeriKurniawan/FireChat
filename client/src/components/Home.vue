@@ -52,7 +52,8 @@ export default {
     return {
 
     }
-  },
+  }
+  ,
   methods:{
     getNews(category){
       this.$store.dispatch('getNews',category)

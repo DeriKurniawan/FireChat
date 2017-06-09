@@ -9,6 +9,7 @@ var passport = require('passport')
 var LocalStrategy = require('passport-local')
 var bcrypt = require('bcrypt')
 var User = require('./models/user.js')
+var cors = require('cors')
 
 var db_config = {
 	development: 'mongodb://localhost:27017/firechat1db',
@@ -18,6 +19,9 @@ var db_config = {
 var index = require('./routes/index');
 var users = require('./routes/users');
 var comments = require('./routes/comments');
+
+var app = express();
+app.use(cors())
 
 passport.use(new LocalStrategy(
 	function(username, password, done){
@@ -32,7 +36,7 @@ passport.use(new LocalStrategy(
   })
 	}));
 
-var app = express();
+
 var app_env = app.settings.env;
 console.log('mongoose -----');
 
@@ -47,6 +51,7 @@ mongoose.connect(db_config[app_env], (err, res)=>{
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 //app.use(logger('dev'));
+app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
