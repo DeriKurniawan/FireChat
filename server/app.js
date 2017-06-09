@@ -20,6 +20,9 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var comments = require('./routes/comments');
 
+var app = express();
+app.use(cors())
+
 passport.use(new LocalStrategy(
 	function(username, password, done){
 	  User.findOne({username : username}, (err, user)=>{
@@ -33,8 +36,7 @@ passport.use(new LocalStrategy(
   })
 	}));
 
-var app = express();
-app.use(cors())
+
 var app_env = app.settings.env;
 console.log('mongoose -----');
 

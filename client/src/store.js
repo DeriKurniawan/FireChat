@@ -12,19 +12,21 @@ export const store = new Vuex.Store({
       {id:3,name:'he',registered:false},
       {id:4,name:'ho',registered:false},
       {id:5,name:'hi',registered:false},
-    ]
+    ],
+    token:''
   },
   mutations:{
     fillNews(state,list){
       state.news=list
       console.log('masukk-----',state);
     }
+
   },
   actions:{
-    getNews(context,category){
+    getNews({ commit },category){
       axios.get(`https://newsapi.org/v1/sources?category=${category}`)
       .then(response =>{
-        context.commit('fillNews',response.data.sources)
+        commit('fillNews',response.data.sources)
       })
     }
   }

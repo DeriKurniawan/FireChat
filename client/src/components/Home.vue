@@ -50,7 +50,8 @@ export default {
     return {
 
     }
-  },
+  }
+  ,
   methods:{
     getNews(category){
       console.log('category=======',category);
