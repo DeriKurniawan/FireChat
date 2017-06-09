@@ -57,6 +57,7 @@ export default {
         window.localStorage.setItem('token', token)
         window.localStorage.setItem('name', user)
         window.location.href = 'http://localhost:8080/forum'
+        location.reload()
       })
       .catch((err)=>{
         console.log(err);
