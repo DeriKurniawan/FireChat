@@ -53,7 +53,9 @@ export default {
       .then((response)=>{
         console.log(response.data.token);
         var token = response.data.token
+        var user = response.data.name
         window.localStorage.setItem('token', token)
+        window.localStorage.setItem('name', user)
         window.location.href = 'http://localhost:8080/forum'
       })
       .catch((err)=>{
