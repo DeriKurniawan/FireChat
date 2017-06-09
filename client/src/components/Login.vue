@@ -54,7 +54,9 @@ export default {
         console.log(response.data.token);
         var token = response.data.token
         window.localStorage.setItem('token', token)
+        console.log(token);
         window.location.href = 'http://localhost:8080/forum'
+        location.reload()
       })
       .catch((err)=>{
         console.log(err);
