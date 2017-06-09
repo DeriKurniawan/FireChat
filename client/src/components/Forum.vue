@@ -22,7 +22,7 @@
                   <div class="ui one stackable cards">
                     <div class="card" v-for='user in users'>
                       <i class="user icon"></i>
-                      <span @click="chatting">{{user.id}}||{{user.name}}</span>
+                      <span @click="chatting">{{user.name}}</span>
                     </div>
                   </div>
 
@@ -35,55 +35,74 @@
       </div>
 
 
-      <div class="ui sidebar inverted vertical menu">
-        <div class="ui minimal comments">
-          <div class="comment">
-            <a class="avatar">
-              <i class="user icon"></i>
-            </a>
-            <div class="content">
-              <a class="author">Steve Jobes</a>
-              <div class="metadata">
-                <div class="date">2 days ago</div>
-              </div>
-              <div class="text">
-                Revolutionary!
-              </div>
-              <div class="actions">
-                <a class="reply active">Reply</a>
-              </div>
-              <form class="ui reply form">
-                <div class="field">
-                  <textarea style="width:100%"></textarea>
+      <div class="ui sidebar vertical menu" style="width:300px">
+        <div class="flex-item">
+          <div class="ui minimal comments" style="margin-top:60%;width:100%">
+            <div class="comment">
+              <a class="avatar">
+                <i class="user icon"></i>
+              </a>
+              <div class="content">
+                <a class="author">Steve Jobes</a>
+                <div class="metadata">
+                  <div class="date">2 days ago</div>
                 </div>
-                <div class="ui primary submit labeled icon button">
-                  <i class="icon edit"></i> Add Reply
+                <div class="text">
+                  Revolutionary!
                 </div>
-              </form>
+                <div class="actions">
+                  <a class="reply active">Reply</a>
+                </div>
+                <form class="ui reply form">
+                  <div class="field">
+                    <label>Short Text</label>
+                    <textarea rows="2"></textarea>
+                  </div>
+                  <div class="ui primary submit labeled icon button">
+                    <i class="icon edit"></i> Add Reply
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
      </div>
-     <div class="pusher">
-
-     </div>
-
 
       <div  class="flex-item ui segment" style="width:65%; background-color:white; border-radius:5px; margin-right:5%;">
           <h1>ARTICLES</h1>
-          <div class="ui grid">
-            <div class="content" v-for="news in listNews">
-              <div class="item">
-                  Name:{{news.name}}
-              </div>
-              <div class="item">
-                  des:{{news.description}}
-              </div>
-              <div class="item">
-                <a :href="news.url" target="_blank">{{news.url}}</a>
+          <div v-if="is_load==false" class="ui grid">
+            <div class="ui divided items">
+              <div class="item" v-for="(news,index) in listNews">
+                <div class="image">
+                  <img :src="news.urlToImage">
+                </div>
+                <div class="content">
+                  <a class="header" :href="news.url" target="_blank">{{news.title}}</a>
+                  <div class="meta">
+                    <span>{{news.publishedAt}}</span>
+                  </div>
+                  <div class="description">
+                    <p>{{news.description}}</p>
+                  </div>
+                  <div class="extra">
+                    <a :href="news.url" target="_blank">Source:{{news.url}}</a>
+                  </div>
+                  <div class="grid" style="margin-top:2%">
+                    <button class="ui blue button" @click="detailNews(index)">Comment</button>
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
 
+
+          <div v-if="is_load==true" class="ui segment">
+            <div class="ui active inverted dimmer">
+              <div class="ui large text loader">Loading</div>
+            </div>
+            <p></p>
+            <p></p>
+            <p></p>
           </div>
       </div>
 
@@ -96,24 +115,26 @@ export default {
   name: 'Home',
   data() {
     return {
-
+        is_load:false
     }
   },
   computed:{
     users(){
-      return this.$store.state.users;
+      return this.$store.getters.getUsers;
     },
-    listNews(){
-      return this.$store.state.news;
+    listNews(is_load){
+      // this.is_load=false;
+      return this.$store.getters.getListNews
     }
   },
   methods:{
-
-    chooseCategory(option){
-      this.$router.push('/forum')
-    },
     chatting(){
       $('.ui.sidebar').sidebar('toggle');
+    },
+    detailNews(index){
+      console.log('asdfasdf',index);
+      this.$store.dispatch('getDetilNews',index)
+      this.$router.push('/forum/comment')
     }
 
   }

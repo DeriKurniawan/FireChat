@@ -8,9 +8,19 @@ import router from './router'
 import Navbar from './components/Navbar'
 // import Footer from './components/Footer'
 import {store} from './store'
+// import firebase from 'firebase'
+
+// var config = {
+//   apiKey: "AIzaSyDdqG5rxU7jCx23JJwlpDSGSejKtlhwcW0",
+//   authDomain: "firechat-8df3a.firebaseapp.com",
+//   databaseURL: "https://firechat-8df3a.firebaseio.com",
+//   storageBucket: "firechat-8df3a.appspot.com"
+// };
+//
+// var firebaseApp = firebase.initializeApp(config);
+// Vue.prototype.$db = firebaseApp.database()
 
 
-Vue.config.productionTip = false
 
 Vue.component('navbar',Navbar)
 // Vue.component('footernav',Footer)

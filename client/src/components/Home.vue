@@ -23,9 +23,11 @@
                       <ul>
                         <li @click="getNews('general')"><router-link to ="/forum/">General</router-link></li>
                         <li @click="getNews('sport')"><router-link to ="/forum/">Sports</router-link></li>
-                        <li @click="getNews('sport')"><router-link to ="/forum/">Economy</router-link></li>
-                        <li @click="getNews('sport')"><router-link to ="/forum/">Politics</router-link></li>
-                        <li @click="getNews('sport')"><router-link to ="/forum/">Technology</router-link></li>
+                        <li @click="getNews('business')"><router-link to ="/forum/">Business</router-link></li>
+                        <li @click="getNews('politics')"><router-link to ="/forum/">Politics</router-link></li>
+                        <li @click="getNews('technology')"><router-link to ="/forum/">Technology</router-link></li>
+                        <li @click="getNews('entertainment')"><router-link to ="/forum/">Entertainment</router-link></li>
+                        <li @click="getNews('gaming')"><router-link to ="/forum/">Gaming</router-link></li>
                       </ul>
                     </div>
                 </div>
@@ -53,7 +55,6 @@ export default {
   },
   methods:{
     getNews(category){
-      console.log('category=======',category);
       this.$store.dispatch('getNews',category)
     }
   }
