@@ -71,6 +71,20 @@
 
       <div  class="flex-item ui segment" style="width:65%; background-color:white; border-radius:5px; margin-right:5%;">
           <h1>ARTICLES</h1>
+          <div class="ui grid">
+            <div class="content" v-for="news in listNews">
+              <div class="item">
+                  Name:{{news.name}}
+              </div>
+              <div class="item">
+                  des:{{news.description}}
+              </div>
+              <div class="item">
+                <a :href="news.url" target="_blank">{{news.url}}</a>
+              </div>
+            </div>
+
+          </div>
       </div>
 
   </div>
@@ -82,12 +96,15 @@ export default {
   name: 'Home',
   data() {
     return {
-      // store:store
+
     }
   },
   computed:{
     users(){
       return this.$store.state.users;
+    },
+    listNews(){
+      return this.$store.state.news;
     }
   },
   methods:{
