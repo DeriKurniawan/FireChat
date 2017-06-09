@@ -13,5 +13,7 @@ export const store = new Vuex.Store({
       {id:4,name:'ho',registered:false},
       {id:5,name:'hi',registered:false},
     ]
+
   }
+
 })

@@ -32,7 +32,7 @@
               <input type="password" name="password">
             </div>
           </div>
-          <div class="ui fluid large blue submit button">Signup</div>
+          <div class="ui fluid large blue submit button" @click="signUp">Signup</div>
         </div>
 
         <div class="ui error message">test</div>
@@ -51,6 +51,21 @@ export default {
     }
   },
   methods:{
+    signUp: function(){
+      axios.post('http://localhost:3000/api/user/signup', {
+        name: this.name,
+        username: this.username,
+        email: this.email,
+        password: this.password
+      })
+      .then(function(response){
+        console.log(response.data);
+        window.location.href='http://localhost:8080/'
+      })
+      .catch(function(err){
+        console.log(err);
+      })
+    }
 
   }
 }
