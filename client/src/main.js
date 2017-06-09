@@ -9,7 +9,7 @@ import Navbar from './components/Navbar'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
-// import Footer from './components/Footer'
+import Footer from './components/Footer'
 import {store} from './store'
 
 

@@ -6,33 +6,33 @@
           Sign-up
         </div>
       </h2>
-      <form class="ui large form">
+      <form class="ui large form" @submit.prevent="submitSignup">
         <div class="ui stacked segment">
           <div class="field">
             <label for="">Name</label>
             <div class="ui left icon input">
-              <input type="text" name="name">
+              <input type="text" v-model="dataUser.name" name="name">
             </div>
           </div>
           <div class="field">
             <label for="">Email</label>
             <div class="ui left icon input">
-              <input type="email" name="email">
+              <input type="email" v-model="dataUser.email" name="email">
             </div>
           </div>
           <div class="field">
             <label for="">Username</label>
             <div class="ui left icon input">
-              <input type="text" name="username">
+              <input type="text" v-model="dataUser.username" name="username">
             </div>
           </div>
           <div class="field">
             <label for="">Password</label>
             <div class="ui left icon input">
-              <input type="password" name="password">
+              <input type="password" v-model="dataUser.password" name="password">
             </div>
           </div>
-          <div class="ui fluid large blue submit button" @click="signUp">Signup</div>
+          <button class="ui fluid large blue submit button">Signup</button>
         </div>
 
         <div class="ui error message">test</div>
@@ -43,30 +43,26 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+
 export default {
   name: 'Signup',
   data() {
     return {
-
+      dataUser: {
+        name: '',
+        email: '',
+        username: '',
+        password:''
+      }
     }
   },
   methods:{
-    signUp: function(){
-      axios.post('http://localhost:3000/api/user/signup', {
-        name: this.name,
-        username: this.username,
-        email: this.email,
-        password: this.password
-      })
-      .then(function(response){
-        console.log(response.data);
-        window.location.href='http://localhost:8080/'
-      })
-      .catch(function(err){
-        console.log(err);
-      })
+    ...mapActions(['signUp']),
+    submitSignup(){
+      console.log("submitSignup", this.dataUser);
+      this.signUp(this.dataUser);
     }
-
   }
 }
 </script>

@@ -21,10 +21,11 @@
                   </div>
                     <div class="content">
                       <ul>
-                        <li><router-link to ="/forum/">Sports</router-link></li>
-                        <li><router-link to ="/forum/">Economy</router-link></li>
-                        <li><router-link to ="/forum/">Politics</router-link></li>
-                        <li><router-link to ="/forum/">Technology</router-link></li>
+                        <li @click="getNews('general')"><router-link to ="/forum/">General</router-link></li>
+                        <li @click="getNews('sport')"><router-link to ="/forum/">Sports</router-link></li>
+                        <li @click="getNews('sport')"><router-link to ="/forum/">Economy</router-link></li>
+                        <li @click="getNews('sport')"><router-link to ="/forum/">Politics</router-link></li>
+                        <li @click="getNews('sport')"><router-link to ="/forum/">Technology</router-link></li>
                       </ul>
                     </div>
                 </div>
@@ -51,7 +52,10 @@ export default {
     }
   },
   methods:{
-
+    getNews(category){
+      console.log('category=======',category);
+      this.$store.dispatch('getNews',category)
+    }
   }
 }
 </script>

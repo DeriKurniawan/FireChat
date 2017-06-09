@@ -9,6 +9,7 @@ var passport = require('passport')
 var LocalStrategy = require('passport-local')
 var bcrypt = require('bcrypt')
 var User = require('./models/user.js')
+var cors = require('cors')
 
 var db_config = {
 	development: 'mongodb://localhost:27017/firechat1db',
@@ -47,6 +48,7 @@ mongoose.connect(db_config[app_env], (err, res)=>{
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 //app.use(logger('dev'));
+app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
