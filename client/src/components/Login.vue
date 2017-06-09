@@ -11,16 +11,16 @@
           <div class="field">
             <div class="ui left icon input">
               <i class="user icon"></i>
-              <input type="text" name="username" placeholder="Username">
+              <input type="text" name="username" v-model="username" placeholder="Username">
             </div>
           </div>
           <div class="field">
             <div class="ui left icon input">
               <i class="lock icon"></i>
-              <input type="password" name="password" placeholder="Password">
+              <input type="password" name="password" v-model="password" placeholder="Password">
             </div>
           </div>
-          <div class="ui fluid large blue submit button">Login</div>
+          <div class="ui fluid large blue submit button" @click="getSignin">Login</div>
         </div>
 
         <div class="ui error message"></div>
@@ -39,11 +39,27 @@ export default {
   name: 'Login',
   data() {
     return {
-
+      username: '',
+      password: ''
     }
   },
   methods:{
-
+    getSignin: function(){
+      self = this
+      axios.post('http://localhost:3000/api/user/signin', {
+        username: self.username,
+        password: self.password
+      })
+      .then((response)=>{
+        console.log(response.data.token);
+        var token = response.data.token
+        window.localStorage.setItem('token', token)
+        window.location.href = 'http://localhost:8080/forum'
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    }
   }
 }
 </script>
