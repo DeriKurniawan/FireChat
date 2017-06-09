@@ -9,6 +9,7 @@ var passport = require('passport')
 var LocalStrategy = require('passport-local')
 var bcrypt = require('bcrypt')
 var User = require('./models/user.js')
+var cors = require('cors')
 
 var db_config = {
 	development: 'mongodb://localhost:27017/firechat1db',
@@ -33,6 +34,7 @@ passport.use(new LocalStrategy(
 	}));
 
 var app = express();
+app.use(cors())
 var app_env = app.settings.env;
 console.log('mongoose -----');
 

@@ -20,7 +20,7 @@
               <input type="password" name="password" placeholder="Password">
             </div>
           </div>
-          <div class="ui fluid large blue submit button">Login</div>
+          <div class="ui fluid large blue submit button" @click="signin">Login</div>
         </div>
 
         <div class="ui error message"></div>
@@ -39,11 +39,14 @@ export default {
   name: 'Login',
   data() {
     return {
-
+      username: '',
+      password: ''
     }
   },
   methods:{
-
+    signin: function(){
+      
+    }
   }
 }
 </script>
