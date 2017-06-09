@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import Forum from '@/components/Forum'
 import Login from '@/components/Login'
 import Signup from '@/components/Signup'
+import DetilNews from '@/components/DetilNews'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/signup',
       name: 'Signup',
       component: Signup
+    },
+    {
+      path: '/forum/comment',
+      name: 'DetilNews',
+      component: DetilNews
     }
   ]
 })
