@@ -13,13 +13,13 @@ module.exports = {
       username: req.body.username,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
-    })
-    .then((user)=>{
-      helper.createCronJob(user)
-      res.send(user)
-    })
-    .catch((err)=>{
-      res.send(err)
+    }, (err, user)=>{
+      if(err){
+        res.send({message: 'user already used, please log in'})
+      } else {
+        helper.createCronJob(user)
+        res.send(user)
+      }
     })
   },
   signin : (req, res)=>{
@@ -35,9 +35,8 @@ module.exports = {
         email: user.email,
       }, 'rahasia', {expiresIn: '1d'})
       res.send({
-
+        name: user.name,
         token: token
-
       })
       console.log(token)
     }
