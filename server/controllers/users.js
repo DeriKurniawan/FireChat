@@ -15,7 +15,7 @@ module.exports = {
         console.log(bcrypt.compareSync('123456', user.password));
         res.send(user)
       } else {
-        res.send(err)
+        res.send({message: 'user is alraedy usage, please log in'})
       }
     })
   },
